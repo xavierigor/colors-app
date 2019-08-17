@@ -1,8 +1,19 @@
 import React from "react";
 import "./App.css";
 
+import colors from "./seeds/Colors";
+
+import GlobalStyles from "./styles/global";
+import Palette from "./components/Palette/index";
+
 function App() {
-  return <div />;
+  return (
+    <>
+      <Palette {...colors[4]} />
+
+      <GlobalStyles />
+    </>
+  );
 }
 
 export default App;
