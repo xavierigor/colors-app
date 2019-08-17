@@ -59,4 +59,62 @@ export const Container = styled.div`
     color: #fff;
     background: rgba(255, 255, 255, 0.3);
   }
+
+  .copy-overlay {
+    width: 100%;
+    height: 100%;
+    background: ${props => props.background};
+    opacity: 0;
+    z-index: 0;
+    transform: scale(0.1);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .copy-overlay.show {
+    position: absolute;
+    opacity: 1;
+    z-index: 2;
+    transform: scale(9);
+  }
+
+  .copy-msg {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    transform: scale(0.1);
+    opacity: 0;
+    z-index: 0;
+    color: #fff;
+    text-align: center;
+  }
+
+  .copy-msg.show {
+    opacity: 1;
+    z-index: 3;
+    transform: scale(1);
+    transition: all 0.4s ease-in-out;
+    transition-delay: 0.2s;
+  }
+
+  .copy-msg h1 {
+    font-weight: 400;
+    font-size: 4.5rem;
+    text-shadow: 1px 2px #000;
+    background: rgba(255, 255, 255, 0.3);
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 20px;
+  }
+
+  .copy-msg p {
+    font-size: 2rem;
+    font-weight: 100;
+    text-transform: lowercase;
+  }
 `;
