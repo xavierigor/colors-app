@@ -4,10 +4,19 @@ import { Container } from "./styles";
 
 export default class ColorBox extends Component {
   render() {
+    const { name, background } = this.props;
+
     return (
-      <Container background={this.props.background}>
-        <span>{this.props.name}</span>
-        <span>MORE</span>
+      <Container background={background}>
+        <div className="copy-container">
+          <div className="box-content">
+            <span>{name}</span>
+          </div>
+          <button className="copy-button" type="button">
+            Copy
+          </button>
+        </div>
+        <span className="see-more">More</span>
       </Container>
     );
   }

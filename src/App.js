@@ -9,7 +9,7 @@ import Palette from "./components/Palette/index";
 function App() {
   return (
     <>
-      <Palette {...colors[4]} />
+      <Palette {...colors[2]} />
 
       <GlobalStyles />
     </>
