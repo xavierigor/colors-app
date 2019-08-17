@@ -16,13 +16,15 @@ export default function Palette({ palette }) {
 
   return (
     <Container>
-      <Slider
-        defaultValue={level}
-        min={100}
-        max={900}
-        step={100}
-        onAfterChange={setLevel}
-      />
+      <div className="slider">
+        <Slider
+          defaultValue={level}
+          min={100}
+          max={900}
+          step={100}
+          onAfterChange={setLevel}
+        />
+      </div>
       <div className="Palette-colors">{colorBoxes}</div>
     </Container>
   );
