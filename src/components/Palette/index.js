@@ -21,6 +21,7 @@ export default function Palette({ palette }) {
       name={color.name}
       colorId={color.id}
       paletteId={palette.id}
+      showLink
     />
   ));
 

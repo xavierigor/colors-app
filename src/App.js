@@ -35,8 +35,15 @@ export default function App() {
           )}
         />
         <Route
-          path="/palette/:id/:color"
-          render={() => <SingleColorPalette />}
+          path="/palette/:paletteId/:colorId"
+          render={routeProps => (
+            <SingleColorPalette
+              colorToFilterBy={routeProps.match.params.colorId}
+              palette={generatePalette(
+                findPalette(routeProps.match.params.paletteId)
+              )}
+            />
+          )}
         />
       </Switch>
 

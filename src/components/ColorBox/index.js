@@ -4,7 +4,13 @@ import { Link } from "react-router-dom";
 
 import { Container } from "./styles";
 
-export default function ColorBox({ name, background, colorId, paletteId }) {
+export default function ColorBox({
+  name,
+  background,
+  showLink,
+  colorId,
+  paletteId
+}) {
   const [copied, setCopied] = useState(false);
 
   async function changeCopyState() {
@@ -35,12 +41,14 @@ export default function ColorBox({ name, background, colorId, paletteId }) {
             Copy
           </button>
         </div>
-        <Link
-          to={`/palette/${paletteId}/${colorId}`}
-          onClick={e => e.stopPropagation()}
-        >
-          <span className="see-more">More</span>
-        </Link>
+        {showLink && (
+          <Link
+            to={`/palette/${paletteId}/${colorId}`}
+            onClick={e => e.stopPropagation()}
+          >
+            <span className="see-more">More</span>
+          </Link>
+        )}
       </Container>
     </CopyToClipboard>
   );
