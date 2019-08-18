@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import { Container, MiddleContainer } from "./styles";
 
@@ -20,6 +21,7 @@ export default function PaletteList({ palettes, routeProps }) {
       <MiddleContainer>
         <nav>
           <h1>Palette List</h1>
+          <Link to="/palette/create">Create New Palette</Link>
         </nav>
         <div className="palettes">{miniPalettes}</div>
       </MiddleContainer>

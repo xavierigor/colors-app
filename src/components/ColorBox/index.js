@@ -42,7 +42,6 @@ export default function ColorBox({
         <div className="copy-container">
           <div className="box-content">
             <span>{name}</span>
-            <div>{chroma(background).luminance()}</div>
           </div>
           <button className="copy-button" type="button">
             Copy

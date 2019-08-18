@@ -9,6 +9,7 @@ import GlobalStyles from "./styles/global";
 import Palette from "./components/Palette/index";
 import PaletteList from "./components/PaletteList";
 import SingleColorPalette from "./components/SingleColorPalette";
+import CreatePalette from "./components/CreatePalette";
 
 export default function App() {
   function findPalette(id) {
@@ -18,6 +19,8 @@ export default function App() {
   return (
     <>
       <Switch>
+        <Route exact path="/palette/create" render={() => <CreatePalette />} />
+
         <Route
           exact
           path="/"
@@ -25,6 +28,7 @@ export default function App() {
             <PaletteList palettes={colors} routeProps={routeProps} />
           )}
         />
+
         <Route
           exact
           path="/palette/:id"
@@ -34,6 +38,7 @@ export default function App() {
             />
           )}
         />
+
         <Route
           path="/palette/:paletteId/:colorId"
           render={routeProps => (
