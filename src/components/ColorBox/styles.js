@@ -28,7 +28,8 @@ export const Container = styled.div`
     text-align: center;
     background: rgba(255, 255, 255, 0.3);
     font-size: 1rem;
-    color: #fff;
+    /* color: #fff; */
+    color: ${props => (props.brightness <= 0.3 ? "#fff" : "#000")} !important;
     text-transform: uppercase;
     line-height: 30px;
     border: none;
@@ -42,7 +43,8 @@ export const Container = styled.div`
     left: 0;
     bottom: 0;
     padding: 10px;
-    color: #000;
+    /* color: #000; */
+    color: ${props => (props.brightness <= 0.3 ? "#fff" : "#000")} !important;
     letter-spacing: 1px;
     font-size: 12px;
   }
@@ -56,7 +58,8 @@ export const Container = styled.div`
     line-height: 30px;
     text-align: center;
     border: none;
-    color: #fff;
+    /* color: #fff; */
+    color: ${props => (props.brightness <= 0.3 ? "#fff" : "#000")} !important;
     background: rgba(255, 255, 255, 0.3);
   }
 
@@ -116,5 +119,6 @@ export const Container = styled.div`
     font-size: 2rem;
     font-weight: 100;
     text-transform: lowercase;
+    color: ${props => (props.brightness <= 0.3 ? "#fff" : "#000")} !important;
   }
 `;

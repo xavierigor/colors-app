@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Link } from "react-router-dom";
+import chroma from "chroma-js";
 
 import { Container } from "./styles";
 
@@ -24,7 +25,11 @@ export default function ColorBox({
 
   return (
     <CopyToClipboard text={background} onCopy={changeCopyState}>
-      <Container background={background} isTall={isTall}>
+      <Container
+        brightness={chroma(background).luminance()}
+        background={background}
+        isTall={isTall}
+      >
         <div
           className={`copy-overlay ${copied && "show"}`}
           background={background}
@@ -37,6 +42,7 @@ export default function ColorBox({
         <div className="copy-container">
           <div className="box-content">
             <span>{name}</span>
+            <div>{chroma(background).luminance()}</div>
           </div>
           <button className="copy-button" type="button">
             Copy
