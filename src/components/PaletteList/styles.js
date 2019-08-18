@@ -1,32 +1,39 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  height: 100vh;
-  background: blue;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
+  min-height: 100%;
+  width: 100%;
+  background: #115fa9;
 `;
 
 export const MiddleContainer = styled.div`
   width: 50%;
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-  flex-wrap: wrap;
+  margin: 0 auto;
+  padding: 20px 0;
+
+  @media (max-width: 1060px) {
+    width: 80%;
+  }
+
+  @media (max-width: 760px) {
+    width: 90%;
+  }
 
   nav {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
+    height: 80px;
     color: #fff;
-    padding: 15px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .palettes {
-    width: 100%;
     display: grid;
-    grid-template-columns: 30% 30% 30%;
-    grid-gap: 5%;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 30px;
+
+    @media (max-width: 560px) {
+      grid-template-columns: 1fr 1fr;
+    }
   }
 `;
