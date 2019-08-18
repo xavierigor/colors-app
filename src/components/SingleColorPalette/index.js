@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 
+import Navbar from "../Navbar";
 import ColorBox from "../ColorBox";
+import Footer from "../PaletteFooter";
 
 import { Container } from "./styles";
 
 export default function SingleColorPalette({ palette, colorToFilterBy }) {
+  const [format, setFormat] = useState("hex");
+
   const _shades = getShades();
 
   function getShades() {
@@ -20,19 +24,24 @@ export default function SingleColorPalette({ palette, colorToFilterBy }) {
     return shades.slice(1);
   }
 
+  async function changeFormat(value) {
+    await setFormat(value);
+  }
+
   const colorBoxes = _shades.map(color => (
     <ColorBox
       key={color.name}
       name={color.name}
-      background={color.hex}
+      background={color[format]}
       showLink={false}
     />
   ));
 
   return (
     <Container>
-      <h1>Single Color Palette</h1>
+      <Navbar showLevel={false} changeFormat={changeFormat} />
       <div className="Palette-colors">{colorBoxes}</div>
+      <Footer paletteName={palette.paletteName} emoji={palette.emoji} />
     </Container>
   );
 }

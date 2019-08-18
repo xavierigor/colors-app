@@ -1,18 +1,14 @@
 import React, { useState } from "react";
 
-import Snackbar from "@material-ui/core/Snackbar";
-import IconButton from "@material-ui/core/IconButton";
-import CloseIcon from "@material-ui/icons/Close";
-
-import { Container, Footer } from "./styles";
+import { Container } from "./styles";
 
 import Navbar from "../Navbar";
 import ColorBox from "../ColorBox";
+import Footer from "../PaletteFooter";
 
 export default function Palette({ palette }) {
   const [level, setLevel] = useState(500);
   const [format, setFormat] = useState("hex");
-  const [snackbar, setSnackbar] = useState(false);
 
   const colorBoxes = palette.colors[level].map(color => (
     <ColorBox
@@ -25,42 +21,21 @@ export default function Palette({ palette }) {
     />
   ));
 
-  async function changeFormat(value) {
-    await setFormat(value);
-    setSnackbar(true);
+  function changeFormat(value) {
+    setFormat(value);
   }
 
   return (
     <Container>
-      <Navbar level={level} setLevel={setLevel} changeFormat={changeFormat} />
+      <Navbar
+        level={level}
+        setLevel={setLevel}
+        changeFormat={changeFormat}
+        showLevel
+      />
       <div className="Palette-colors">{colorBoxes}</div>
 
-      <Snackbar
-        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-        open={snackbar}
-        onClose={() => setSnackbar(false)}
-        autoHideDuration={3000}
-        message={
-          <span id="message-id">Format Changed to {format.toUpperCase()}!</span>
-        }
-        ContentProps={{
-          "aria-describedby": "message-id"
-        }}
-        action={
-          <IconButton
-            onClick={() => setSnackbar(false)}
-            key="close"
-            aria-label="close"
-            color="inherit"
-          >
-            <CloseIcon />
-          </IconButton>
-        }
-      />
-      <Footer>
-        <h4>{palette.paletteName}</h4>
-        <span className="emoji">{palette.emoji}</span>
-      </Footer>
+      <Footer paletteName={palette.paletteName} emoji={palette.emoji} />
     </Container>
   );
 }
