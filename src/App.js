@@ -20,7 +20,9 @@ export default function App() {
         <Route
           exact
           path="/"
-          render={() => <PaletteList palettes={colors} />}
+          render={routeProps => (
+            <PaletteList palettes={colors} routeProps={routeProps} />
+          )}
         />
         <Route
           exact

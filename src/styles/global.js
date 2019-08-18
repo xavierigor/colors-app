@@ -14,6 +14,10 @@ export default createGlobalStyle`
         -webkit-font-smoothing: antialiased !important;
     }
 
+    /* body, html, #root {
+        height: 100%;
+    } */
+
     body, input, button {
         font-family: 'Roboto', sans-serif;
     }
