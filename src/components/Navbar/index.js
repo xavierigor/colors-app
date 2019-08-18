@@ -34,7 +34,7 @@ export default function Navbar({ level, setLevel, changeFormat }) {
       </div>
       <div className="select-container">
         <Select onChange={handleChange} value={format}>
-          <MenuItem value="hex">HEX - #fff</MenuItem>
+          <MenuItem value="hex">HEX - #ffffff</MenuItem>
           <MenuItem value="rgb">RGB - rgb(255, 255, 255)</MenuItem>
           <MenuItem value="rgba">RGBA - rgba(255, 255, 255, 1.0)</MenuItem>
         </Select>

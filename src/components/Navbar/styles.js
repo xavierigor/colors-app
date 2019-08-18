@@ -48,4 +48,8 @@ export const Container = styled.header`
     margin-left: -7px;
     margin-top: -3px;
   }
+
+  .select-container {
+    margin: 0 1rem 0 auto;
+  }
 `;
