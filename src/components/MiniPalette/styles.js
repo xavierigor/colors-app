@@ -7,7 +7,6 @@ export const Container = styled.div`
   position: relative;
   overflow: hidden;
   cursor: pointer;
-  /* border: 1px solid #000; */
 
   .colors {
     width: 100%;

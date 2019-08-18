@@ -7,6 +7,6 @@ export const Container = styled.div`
   flex-direction: column;
 
   .Palette-colors {
-    height: 90%;
+    height: 85%;
   }
 `;

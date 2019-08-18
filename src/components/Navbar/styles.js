@@ -4,7 +4,7 @@ export const Container = styled.header`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  height: 5vh;
+  height: 8vh;
 
   .logo {
     margin-right: 15px;
