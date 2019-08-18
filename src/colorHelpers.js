@@ -7,12 +7,23 @@ function generatePalette(starterPalette) {
     paletteName: starterPalette.paletteName,
     id: starterPalette.id,
     emoji: starterPalette.emoji,
-    colors: {}
+    colors: {
+      50: [],
+      100: [],
+      200: [],
+      300: [],
+      400: [],
+      500: [],
+      600: [],
+      700: [],
+      800: [],
+      900: []
+    }
   };
 
-  for (let level of levels) {
-    newPalette.colors[level] = [];
-  }
+  // for (let level of levels) {
+  //   newPalette.colors[level] = [];
+  // }
 
   for (let color of starterPalette.colors) {
     let scale = generateScale(color.color, 10).reverse();

@@ -8,6 +8,7 @@ import { Route, Switch } from "react-router-dom";
 import GlobalStyles from "./styles/global";
 import Palette from "./components/Palette/index";
 import PaletteList from "./components/PaletteList";
+import SingleColorPalette from "./components/SingleColorPalette";
 
 export default function App() {
   function findPalette(id) {
@@ -32,6 +33,10 @@ export default function App() {
               palette={generatePalette(findPalette(routeProps.match.params.id))}
             />
           )}
+        />
+        <Route
+          path="/palette/:id/:color"
+          render={() => <SingleColorPalette />}
         />
       </Switch>
 

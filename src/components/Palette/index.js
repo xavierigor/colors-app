@@ -15,7 +15,13 @@ export default function Palette({ palette }) {
   const [snackbar, setSnackbar] = useState(false);
 
   const colorBoxes = palette.colors[level].map(color => (
-    <ColorBox key={color.id} background={color[format]} name={color.name} />
+    <ColorBox
+      key={color.id}
+      background={color[format]}
+      name={color.name}
+      colorId={color.id}
+      paletteId={palette.id}
+    />
   ));
 
   async function changeFormat(value) {
