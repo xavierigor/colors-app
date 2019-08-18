@@ -4,7 +4,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 
-import { Container } from "./styles";
+import { Container, Footer } from "./styles";
 
 import Navbar from "../Navbar";
 import ColorBox from "../ColorBox";
@@ -50,6 +50,10 @@ export default function Palette({ palette }) {
           </IconButton>
         }
       />
+      <Footer>
+        <h4>{palette.paletteName}</h4>
+        <span className="emoji">{palette.emoji}</span>
+      </Footer>
     </Container>
   );
 }

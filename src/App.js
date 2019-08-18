@@ -10,7 +10,7 @@ import Palette from "./components/Palette/index";
 export default function App() {
   return (
     <>
-      <Palette palette={generatePalette(colors[4])} />
+      <Palette palette={generatePalette(colors[0])} />
 
       <GlobalStyles />
     </>

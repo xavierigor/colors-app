@@ -12,10 +12,9 @@ export default createGlobalStyle`
 
     body {
         -webkit-font-smoothing: antialiased !important;
-        overflow: hidden;
     }
 
     body, input, button {
-        font: 14px 'Roboto', sans-serif;
+        font-family: 'Roboto', sans-serif;
     }
 `;

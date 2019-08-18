@@ -12,13 +12,13 @@ export default function Navbar({ level, setLevel, changeFormat }) {
 
   function handleChange(e) {
     setFormat(e.target.value);
-    changeFormat(e.target.value);
+    changeFormat(e.target.value); // coming from the props
   }
 
   return (
     <Container>
       <div className="logo">
-        <a href="#">reactcolorpicker</a>
+        <a href="/">reactcolorpicker</a>
       </div>
       <div className="slider-container">
         <span>Level: {level}</span>
