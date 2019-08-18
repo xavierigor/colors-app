@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 20%;
-  height: 25%;
+  height: ${props => (props.isTall ? "50%" : "25%")};
   margin: 0 auto;
   display: inline-block;
   position: relative;

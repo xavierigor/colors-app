@@ -9,7 +9,8 @@ export default function ColorBox({
   background,
   showLink,
   colorId,
-  paletteId
+  paletteId,
+  isTall
 }) {
   const [copied, setCopied] = useState(false);
 
@@ -23,7 +24,7 @@ export default function ColorBox({
 
   return (
     <CopyToClipboard text={background} onCopy={changeCopyState}>
-      <Container background={background}>
+      <Container background={background} isTall={isTall}>
         <div
           className={`copy-overlay ${copied && "show"}`}
           background={background}

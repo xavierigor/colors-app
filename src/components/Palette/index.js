@@ -18,6 +18,7 @@ export default function Palette({ palette }) {
       colorId={color.id}
       paletteId={palette.id}
       showLink
+      isTall={false}
     />
   ));
 

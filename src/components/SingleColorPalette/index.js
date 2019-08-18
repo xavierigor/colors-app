@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 import Navbar from "../Navbar";
 import ColorBox from "../ColorBox";
@@ -24,8 +25,8 @@ export default function SingleColorPalette({ palette, colorToFilterBy }) {
     return shades.slice(1);
   }
 
-  async function changeFormat(value) {
-    await setFormat(value);
+  function changeFormat(value) {
+    setFormat(value);
   }
 
   const colorBoxes = _shades.map(color => (
@@ -34,13 +35,19 @@ export default function SingleColorPalette({ palette, colorToFilterBy }) {
       name={color.name}
       background={color[format]}
       showLink={false}
+      isTall
     />
   ));
 
   return (
     <Container>
       <Navbar showLevel={false} changeFormat={changeFormat} />
-      <div className="Palette-colors">{colorBoxes}</div>
+      <div className="Palette-colors">
+        {colorBoxes}
+        <Link to={`/palette/${palette.id}`} className="go-back-box">
+          <div className="go-back-text">Go Back</div>
+        </Link>
+      </div>
       <Footer paletteName={palette.paletteName} emoji={palette.emoji} />
     </Container>
   );
