@@ -7,9 +7,9 @@ export const Container = styled.div`
 `;
 
 export const MiddleContainer = styled.div`
-  width: 50%;
+  width: 60%;
   margin: 0 auto;
-  padding: 20px 0;
+  padding: 0 0 30px 0;
 
   @media (max-width: 1060px) {
     width: 80%;
@@ -20,21 +20,32 @@ export const MiddleContainer = styled.div`
   }
 
   nav {
-    height: 80px;
+    height: 90px;
     color: #fff;
     display: flex;
     justify-content: space-between;
     align-items: center;
 
     a {
+      text-decoration: none;
       color: #fff;
+    }
+
+    .create-new-palette {
+      font-weight: 500;
+      text-decoration: underline !important;
     }
   }
 
   .palettes {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 30px;
+    grid-gap: 50px;
+
+    @media (max-width: 620px) {
+      grid-row-gap: 30px;
+      grid-column-gap: 15px;
+    }
 
     @media (max-width: 560px) {
       grid-template-columns: 1fr 1fr;

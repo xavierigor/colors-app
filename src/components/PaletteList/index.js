@@ -20,8 +20,12 @@ export default function PaletteList({ palettes, routeProps }) {
     <Container>
       <MiddleContainer>
         <nav>
-          <h1>Palette List</h1>
-          <Link to="/palette/create">Create New Palette</Link>
+          <Link to="/">
+            <h1>reactcolorpicker</h1>
+          </Link>
+          <Link to="/palette/create" className="create-new-palette">
+            Create New Palette
+          </Link>
         </nav>
         <div className="palettes">{miniPalettes}</div>
       </MiddleContainer>
