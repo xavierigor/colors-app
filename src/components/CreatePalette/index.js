@@ -36,8 +36,8 @@ export default function PersistentDrawerLeft() {
     { name: "Purple", color: "purple" },
     { name: "Sky Pink", color: "#ece" },
     { name: "Green", color: "green" },
-    { name: "Blue", color: "blue" },
     { name: "Gray", color: "gray" },
+    { name: "Lightgray", color: "lightgray" },
     { name: "Olive", color: "olive" }
   ]);
 
@@ -95,7 +95,12 @@ export default function PersistentDrawerLeft() {
           </div>
           <Divider />
           <div className="drawer-content">
-            <h5 className="drawer-title">Design Your Palette 🎨</h5>
+            <h5 className="drawer-title">
+              Design Your Palette{" "}
+              <span role="img" aria-label="emoji">
+                🎨
+              </span>
+            </h5>
 
             <div className="small-buttons">
               <Button
