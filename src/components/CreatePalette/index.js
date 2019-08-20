@@ -14,14 +14,166 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
 import { ChromePicker } from "react-color";
 import chroma from "chroma-js";
 
-import ColorBox from "../ColorBox";
+import DraggableColorBox from "../DraggableColorBox";
 
 import { Container } from "./styles";
 
 const drawerWidth = 340;
+
+export default function PersistentDrawerLeft() {
+  const classes = useStyles();
+  // const theme = useTheme();
+  const [open, setOpen] = useState(true);
+  const [currentColor, setCurrentColor] = useState({
+    name: "",
+    color: "#3D3C3C"
+  });
+  const [colors, setColors] = useState([
+    { name: "Purple", color: "purple" },
+    { name: "Sky Pink", color: "#ece" },
+    { name: "Green", color: "green" },
+    { name: "Blue", color: "blue" },
+    { name: "Gray", color: "gray" },
+    { name: "Olive", color: "olive" }
+  ]);
+
+  function handleDrawerOpen() {
+    setOpen(true);
+  }
+
+  function handleDrawerClose() {
+    setOpen(false);
+  }
+
+  return (
+    <Container>
+      <div className={classes.root}>
+        <CssBaseline />
+        <AppBar
+          color="default"
+          position="fixed"
+          className={clsx(classes.appBar, {
+            [classes.appBarShift]: open
+          })}
+        >
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              className={clsx(classes.menuButton, open && classes.hide)}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" noWrap className={classes.title}>
+              Create A Palette
+            </Typography>
+            <Link to="/" className="appbar-link">
+              Go Back
+            </Link>
+            <Button>Save Palette</Button>
+          </Toolbar>
+        </AppBar>
+        <Drawer
+          className={classes.drawer}
+          variant="persistent"
+          anchor="left"
+          open={open}
+          classes={{
+            paper: classes.drawerPaper
+          }}
+        >
+          <div className={classes.drawerHeader}>
+            <IconButton onClick={handleDrawerClose}>
+              <ChevronLeftIcon />
+            </IconButton>
+          </div>
+          <Divider />
+          <div className="drawer-content">
+            <h5 className="drawer-title">Design Your Palette 🎨</h5>
+
+            <div className="small-buttons">
+              <Button
+                onClick={() => setColors([])}
+                variant="contained"
+                color="secondary"
+              >
+                Clear Palette
+              </Button>
+              <Button variant="contained" color="primary">
+                Random Color
+              </Button>
+            </div>
+            <ChromePicker
+              className="picker"
+              color={currentColor.color}
+              onChangeComplete={newColor =>
+                setCurrentColor({
+                  name: currentColor.name,
+                  color: newColor.hex
+                })
+              }
+            />
+            <TextField
+              required
+              className="text-field"
+              autoComplete="off"
+              id="color-name"
+              label="Color Name"
+              value={currentColor.name}
+              onChange={e =>
+                setCurrentColor({
+                  name: e.target.value,
+                  color: currentColor.color
+                })
+              }
+            />
+            <Button
+              className="big-button"
+              style={{
+                width: "100%",
+                backgroundColor: currentColor.color,
+                color:
+                  chroma(currentColor.color).luminance() <= 0.3
+                    ? "#fff"
+                    : "#000"
+              }}
+              variant="contained"
+              onClick={() =>
+                setColors([
+                  ...colors,
+                  { name: currentColor.name, color: currentColor.color }
+                ])
+              }
+            >
+              Add Color
+            </Button>
+          </div>
+        </Drawer>
+        <main
+          className={clsx(classes.content, {
+            [classes.contentShift]: open
+          })}
+        >
+          <div className={classes.drawerHeader} />
+
+          {colors.map((color, i) => (
+            <DraggableColorBox
+              key={i}
+              background={color.color}
+              name={color.name}
+            />
+          ))}
+        </main>
+      </div>
+    </Container>
+  );
+}
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -66,10 +218,6 @@ const useStyles = makeStyles(theme => ({
     ...theme.mixins.toolbar,
     justifyContent: "flex-end"
   },
-  buttons: {
-    display: "flex",
-    justifyContent: "space-around"
-  },
   content: {
     flexGrow: 1,
     paddingLeft: theme.spacing(0),
@@ -81,7 +229,8 @@ const useStyles = makeStyles(theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
     }),
-    marginLeft: -drawerWidth
+    marginLeft: -drawerWidth,
+    height: "100vh"
   },
   contentShift: {
     transition: theme.transitions.create("margin", {
@@ -91,115 +240,3 @@ const useStyles = makeStyles(theme => ({
     marginLeft: 0
   }
 }));
-
-export default function PersistentDrawerLeft() {
-  const classes = useStyles();
-  // const theme = useTheme();
-  const [open, setOpen] = useState(false);
-  const [currentColor, setCurrentColor] = useState("#fff");
-  const [colors, setColors] = useState(["purple", "#ece"]);
-
-  function handleDrawerOpen() {
-    setOpen(true);
-  }
-
-  function handleDrawerClose() {
-    setOpen(false);
-  }
-
-  return (
-    <Container>
-      <div className={classes.root}>
-        <CssBaseline />
-        <AppBar
-          color="default"
-          position="fixed"
-          className={clsx(classes.appBar, {
-            [classes.appBarShift]: open
-          })}
-        >
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              edge="start"
-              className={clsx(classes.menuButton, open && classes.hide)}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" noWrap className={classes.title}>
-              Create A Palette
-            </Typography>
-            <Link to="/" className="appbar-link">
-              Go Back
-            </Link>
-            <Button>
-              <Link className="appbar-link">Save Palette</Link>
-            </Button>
-          </Toolbar>
-        </AppBar>
-        <Drawer
-          className={classes.drawer}
-          variant="persistent"
-          anchor="left"
-          open={open}
-          classes={{
-            paper: classes.drawerPaper
-          }}
-        >
-          <div className={classes.drawerHeader}>
-            <IconButton onClick={handleDrawerClose}>
-              <ChevronLeftIcon />
-            </IconButton>
-          </div>
-          <Divider />
-
-          <Typography variant="h5">Design Your Palette</Typography>
-
-          <div className={classes.buttons}>
-            <Button variant="contained" color="secondary">
-              Clear Palette
-            </Button>
-            <Button variant="contained" color="primary">
-              Random Color
-            </Button>
-          </div>
-          <ChromePicker
-            color={currentColor}
-            onChangeComplete={newColor => setCurrentColor(newColor.hex)}
-          />
-          <Button
-            style={{
-              backgroundColor: currentColor,
-              color: chroma(currentColor).luminance() <= 0.3 ? "#fff" : "#000"
-            }}
-            variant="contained"
-            onClick={() => setColors([...colors, currentColor])}
-          >
-            Add Color
-          </Button>
-        </Drawer>
-        <main
-          className={clsx(classes.content, {
-            [classes.contentShift]: open
-          })}
-        >
-          <div className={classes.drawerHeader} />
-
-          {colors.map(color => (
-            <ColorBox
-              name="New Color"
-              background={color}
-              showLink={false}
-              isTall={false}
-              key={color}
-            >
-              {color}
-            </ColorBox>
-          ))}
-        </main>
-      </div>
-    </Container>
-  );
-}
