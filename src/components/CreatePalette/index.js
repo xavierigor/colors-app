@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import clsx from "clsx";
@@ -14,9 +14,9 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
 import { ChromePicker } from "react-color";
 import chroma from "chroma-js";
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 
 import DraggableColorBox from "../DraggableColorBox";
 
@@ -48,6 +48,26 @@ export default function PersistentDrawerLeft() {
   function handleDrawerClose() {
     setOpen(false);
   }
+
+  async function addNewColor() {
+    await setColors([
+      ...colors,
+      {
+        name: currentColor.name,
+        color: currentColor.color
+      }
+    ]);
+    setCurrentColor({ name: "", color: "#fff" });
+  }
+
+  useEffect(() => {
+    ValidatorForm.addValidationRule("name-unique", value =>
+      colors.every(({ name }) => name.toLowerCase() !== value.toLowerCase())
+    );
+    ValidatorForm.addValidationRule("color-unique", () =>
+      colors.every(({ color }) => color !== currentColor.color)
+    );
+  }, [currentColor]);
 
   return (
     <Container>
@@ -124,40 +144,43 @@ export default function PersistentDrawerLeft() {
                 })
               }
             />
-            <TextField
-              required
-              className="text-field"
-              autoComplete="off"
-              id="color-name"
-              label="Color Name"
-              value={currentColor.name}
-              onChange={e =>
-                setCurrentColor({
-                  name: e.target.value,
-                  color: currentColor.color
-                })
-              }
-            />
-            <Button
-              className="big-button"
-              style={{
-                width: "100%",
-                backgroundColor: currentColor.color,
-                color:
-                  chroma(currentColor.color).luminance() <= 0.3
-                    ? "#fff"
-                    : "#000"
-              }}
-              variant="contained"
-              onClick={() =>
-                setColors([
-                  ...colors,
-                  { name: currentColor.name, color: currentColor.color }
-                ])
-              }
-            >
-              Add Color
-            </Button>
+
+            <ValidatorForm onSubmit={addNewColor}>
+              <TextValidator
+                id="color-name"
+                label="Color Name"
+                className="text-field"
+                autoComplete="off"
+                value={currentColor.name}
+                onChange={e =>
+                  setCurrentColor({
+                    name: e.target.value,
+                    color: currentColor.color
+                  })
+                }
+                validators={["required", "name-unique", "color-unique"]}
+                errorMessages={[
+                  "Color name is required",
+                  "This color name already exists",
+                  "This color already exists"
+                ]}
+              />
+              <Button
+                type="submit"
+                className="big-button"
+                style={{
+                  width: "100%",
+                  backgroundColor: currentColor.color,
+                  color:
+                    chroma(currentColor.color).luminance() <= 0.3
+                      ? "#fff"
+                      : "#000"
+                }}
+                variant="contained"
+              >
+                Add Color
+              </Button>
+            </ValidatorForm>
           </div>
         </Drawer>
         <main
